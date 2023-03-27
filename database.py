@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, URL
 from sqlalchemy.orm import sessionmaker
-from .models import Users
+from models import Users
 import os
 
 

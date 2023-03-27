@@ -8,7 +8,8 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html, Input, Output, State, ALL
 from dash.exceptions import PreventUpdate
 from utils.login_handler import restricted_page
-from models import Users, db
+from database import Users
+import database as db
 
 load_dotenv()
 
@@ -20,10 +21,6 @@ app = dash.Dash(
     __name__, server=server, use_pages=True, suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.SIMPLEX]
 )
 
-# Keep this out of source code repository - save in a file or a database
-#  passwords should be encrypted
-VALID_USERNAME_PASSWORD = {"test": "test", "hello": "world"}
-
 
 # Updating the Flask Server configuration with Secret Key to encrypt the user session cookie
 server.config.update(SECRET_KEY=os.urandom(33))
@@ -32,7 +29,6 @@ server.config.update(SECRET_KEY=os.urandom(33))
 login_manager = LoginManager()
 login_manager.init_app(server)
 login_manager.login_view = "/login"
-
 
 
 @login_manager.user_loader
