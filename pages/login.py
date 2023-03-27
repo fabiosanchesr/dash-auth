@@ -40,10 +40,14 @@ form = dbc.Form([username_input, passwor_input, button])
 
 
 # Login screen
-layout = html.Div(
+layout = dbc.Container(
     [
-        html.Div(form),
-        html.Div(children='', id='output-state')
+        dbc.Col(
+            html.Div(form)
+        ),
+        dbc.Col(
+            html.Div(children='', id='output-state')
+        )
     ],
     className="d-flex justify-content-center"
 )
@@ -79,13 +83,13 @@ def update_output(n_clicks, input1, input2):
         user = db.session.query(Users).filter_by(username=input1).first()
         if user:
             if check_password_hash(user.password, input2):
-                return ''
+                return 'Teste'
             else:
                 return 'Invalid userane or password'
         else:
             return 'Invalid userane or password'
     else:
-        return '/heatmap'
+        return '{input1}'
 
 
 # html.Form(
