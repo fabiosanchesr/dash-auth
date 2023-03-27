@@ -22,8 +22,7 @@ class Users(Base, UserMixin):
 
     @staticmethod
     def get(user_id):
-        return users.get(user_id)
+        return Users.get(user_id)
 
-user = db.session.query(Users).filter_by(username='fab%').first()
 
 #Base.metadata.create_all(db.engine)
